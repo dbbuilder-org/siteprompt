@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SitePrompt — Install the Chrome Extension</title>
+  <meta name="description" content="Turn design inspiration into Claude Design prompts. Install the SitePrompt Chrome extension in 3 steps." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand: #6366f1;
+      --brand-dark: #4338ca;
+      --brand-light: #e0e7ff;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-400: #9ca3af;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-900: #111827;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--gray-900);
+      background: #fff;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-100);
+      padding: 0 24px;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      flex-shrink: 0;
+    }
+    .nav-logo span { font-weight: 700; font-size: 17px; color: var(--gray-900); }
+    .nav-cta {
+      background: var(--brand); color: #fff;
+      padding: 8px 18px; border-radius: 8px;
+      text-decoration: none; font-size: 13px; font-weight: 600;
+      transition: background .15s;
+    }
+    .nav-cta:hover { background: var(--brand-dark); }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 72px 24px 56px;
+      background: linear-gradient(180deg, #f0f4ff 0%, #fff 100%);
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--brand-light); color: var(--brand-dark);
+      font-size: 12px; font-weight: 600; padding: 4px 12px;
+      border-radius: 999px; margin-bottom: 20px;
+    }
+    .badge-dot { width: 7px; height: 7px; background: var(--brand); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+    h1 { font-size: clamp(28px,5vw,48px); font-weight: 800; line-height: 1.15; color: var(--gray-900); margin-bottom: 16px; }
+    h1 span { background: linear-gradient(135deg, #6366f1, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-sub { font-size: 17px; color: var(--gray-600); max-width: 560px; margin: 0 auto 32px; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gray-900); color: #fff;
+      padding: 14px 28px; border-radius: 12px;
+      font-size: 15px; font-weight: 600; text-decoration: none;
+      transition: background .15s, transform .1s;
+    }
+    .btn-primary:hover { background: #1f2937; transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1.5px solid var(--gray-200); color: var(--gray-700);
+      padding: 14px 28px; border-radius: 12px;
+      font-size: 15px; font-weight: 600; text-decoration: none;
+      transition: background .15s;
+      margin-left: 12px;
+    }
+    .btn-secondary:hover { background: var(--gray-50); }
+
+    /* INSTALL STEPS */
+    .section { max-width: 800px; margin: 0 auto; padding: 56px 24px; }
+    .section-title { font-size: 28px; font-weight: 800; text-align: center; margin-bottom: 8px; }
+    .section-sub { font-size: 15px; color: var(--gray-600); text-align: center; margin-bottom: 40px; }
+
+    .steps { display: flex; flex-direction: column; gap: 0; }
+    .step {
+      display: grid; grid-template-columns: 56px 1fr;
+      gap: 20px; position: relative; padding-bottom: 40px;
+    }
+    .step:last-child { padding-bottom: 0; }
+    .step-num-col { display: flex; flex-direction: column; align-items: center; }
+    .step-num {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--brand); color: #fff;
+      font-size: 17px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; position: relative; z-index: 1;
+    }
+    .step-line {
+      flex: 1; width: 2px; background: var(--gray-200);
+      margin-top: 6px; min-height: 20px;
+    }
+    .step:last-child .step-line { display: none; }
+    .step-body { padding-top: 8px; }
+    .step-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .step-desc { color: var(--gray-600); font-size: 14px; line-height: 1.7; }
+    .step-desc code {
+      background: var(--gray-100); padding: 2px 7px;
+      border-radius: 5px; font-family: monospace; font-size: 12px;
+    }
+
+    .step-img {
+      margin-top: 14px; border-radius: 10px;
+      border: 1px solid var(--gray-200);
+      overflow: hidden; background: var(--gray-50);
+    }
+    .step-img-mock {
+      height: 120px; display: flex; align-items: center; justify-content: center;
+      font-size: 13px; color: var(--gray-400);
+      background: linear-gradient(135deg, #f0f4ff, #fdf4ff);
+    }
+
+    /* CODE BLOCK */
+    .download-card {
+      background: var(--gray-900); border-radius: 16px;
+      padding: 28px; margin: 32px 0;
+    }
+    .download-card h3 { color: #fff; font-size: 16px; margin-bottom: 4px; }
+    .download-card p { color: var(--gray-400); font-size: 13px; margin-bottom: 20px; }
+    .download-btns { display: flex; flex-wrap: wrap; gap: 10px; }
+    .dl-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,0.08); color: #fff;
+      padding: 10px 18px; border-radius: 9px;
+      font-size: 13px; font-weight: 600; text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.12);
+      transition: background .15s;
+    }
+    .dl-btn:hover { background: rgba(255,255,255,0.15); }
+    .dl-btn.primary { background: var(--brand); border-color: var(--brand); }
+    .dl-btn.primary:hover { background: var(--brand-dark); border-color: var(--brand-dark); }
+
+    /* WIZARD PREVIEW */
+    .features { background: var(--gray-50); padding: 56px 24px; }
+    .features-inner { max-width: 900px; margin: 0 auto; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-top: 36px; }
+    .feature-card {
+      background: #fff; border-radius: 14px;
+      border: 1px solid var(--gray-100);
+      padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04);
+    }
+    .feature-num { font-size: 28px; font-weight: 900; color: var(--gray-100); display: block; margin-bottom: 6px; }
+    .feature-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+    .feature-desc { font-size: 12px; color: var(--gray-600); line-height: 1.6; }
+
+    /* CTA BANNER */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--brand) 0%, #8b5cf6 100%);
+      color: #fff; text-align: center; padding: 56px 24px;
+    }
+    .cta-banner h2 { font-size: 28px; font-weight: 800; margin-bottom: 10px; }
+    .cta-banner p { font-size: 15px; opacity: .85; margin-bottom: 28px; }
+    .cta-banner a {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #fff; color: var(--brand-dark);
+      padding: 14px 28px; border-radius: 12px;
+      font-size: 15px; font-weight: 700; text-decoration: none;
+      transition: transform .1s;
+    }
+    .cta-banner a:hover { transform: translateY(-1px); }
+
+    /* FOOTER */
+    footer {
+      text-align: center; padding: 24px; font-size: 12px; color: var(--gray-400);
+      border-top: 1px solid var(--gray-100);
+    }
+    footer a { color: var(--gray-600); }
+
+    @media (max-width: 600px) {
+      .btn-secondary { margin-left: 0; margin-top: 10px; display: flex; }
+      .hero { padding: 48px 20px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://siteprompt.servicevision.io" class="nav-logo">
+    <div class="nav-logo-icon"></div>
+    <span>SitePrompt</span>
+  </a>
+  <a href="https://siteprompt.servicevision.io" class="nav-cta">Open Web App →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge"><span class="badge-dot"></span> Chrome Extension · Free</div>
+  <h1>Install SitePrompt &amp;<br><span>Build your design brief</span></h1>
+  <p class="hero-sub">
+    A 6-step wizard that distills inspiration from up to 3 sites into a PDF brief and ready-to-paste Claude Design prompts.
+  </p>
+  <a href="https://github.com/dbbuilder-org/siteprompt/releases/latest/download/siteprompt-extension-v0.1.0.zip" class="btn-primary">
+    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+    Download Extension (.zip)
+  </a>
+  <a href="https://github.com/dbbuilder-org/siteprompt" class="btn-secondary">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+    View on GitHub
+  </a>
+</section>
+
+<!-- HOW TO INSTALL -->
+<div class="section">
+  <h2 class="section-title">Install in 3 steps</h2>
+  <p class="section-sub">No Chrome Web Store required — load it directly as an unpacked extension.</p>
+
+  <!-- Download card -->
+  <div class="download-card">
+    <h3>Download the extension</h3>
+    <p>Get the latest release zip — contains the pre-built extension ready to load.</p>
+    <div class="download-btns">
+      <a href="https://github.com/dbbuilder-org/siteprompt/releases/latest/download/siteprompt-extension-v0.1.0.zip" class="dl-btn primary">
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        siteprompt-extension-v0.1.0.zip
+      </a>
+      <a href="https://github.com/dbbuilder-org/siteprompt/releases" class="dl-btn">
+        All releases →
+      </a>
+    </div>
+  </div>
+
+  <div class="steps">
+
+    <!-- Step 1 -->
+    <div class="step">
+      <div class="step-num-col">
+        <div class="step-num">1</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-title">Unzip the download</div>
+        <div class="step-desc">
+          After downloading, unzip <code>siteprompt-extension-v0.1.0.zip</code>.<br>
+          You'll get a <code>dist/</code> folder — that's your extension folder. Put it somewhere permanent (e.g. <code>~/Extensions/siteprompt/</code>).
+          <br><br>
+          <strong>Don't move or delete the folder after loading</strong> — Chrome loads directly from it.
+        </div>
+        <div class="step-img">
+          <div class="step-img-mock">📁 siteprompt-extension-v0.1.0.zip → <strong>dist/</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step">
+      <div class="step-num-col">
+        <div class="step-num">2</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-title">Open Chrome Extensions with Developer Mode on</div>
+        <div class="step-desc">
+          In Chrome, navigate to <code>chrome://extensions</code><br><br>
+          Toggle <strong>Developer mode</strong> on — the switch is in the top-right corner of the Extensions page.<br><br>
+          This unlocks the ability to load local extensions.
+        </div>
+        <div class="step-img">
+          <div class="step-img-mock" style="flex-direction:column;gap:8px;">
+            <div style="background:#fff;border-radius:8px;padding:10px 20px;border:1px solid #e5e7eb;font-size:12px;display:flex;align-items:center;gap:12px;width:300px;">
+              <span>Developer mode</span>
+              <span style="margin-left:auto;background:#6366f1;color:#fff;padding:3px 10px;border-radius:20px;font-size:11px;">ON</span>
+            </div>
+            <span style="font-size:12px;color:#9ca3af;">Toggle at chrome://extensions → top right</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step">
+      <div class="step-num-col">
+        <div class="step-num">3</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-title">Click "Load unpacked" and select the dist/ folder</div>
+        <div class="step-desc">
+          Click the <strong>Load unpacked</strong> button that appears after enabling Developer mode.<br><br>
+          Navigate to and select the <code>dist/</code> folder you unzipped in Step 1.<br><br>
+          SitePrompt will appear in your extensions list with its purple icon. Pin it to your toolbar for easy access.
+        </div>
+        <div class="step-img">
+          <div class="step-img-mock" style="flex-direction:column;gap:8px;">
+            <div style="background:#6366f1;color:#fff;padding:8px 20px;border-radius:8px;font-size:13px;font-weight:600;">
+              Load unpacked
+            </div>
+            <span style="font-size:12px;color:#9ca3af;">Select the dist/ folder → Click Select Folder</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Usage tip -->
+  <div style="margin-top:40px;background:#f0f4ff;border-radius:14px;padding:20px 24px;border:1px solid #c7d2fe;">
+    <div style="font-weight:700;color:#4338ca;margin-bottom:6px;">✓ You're ready to use SitePrompt</div>
+    <div style="font-size:13px;color:#4b5563;line-height:1.7;">
+      Navigate to any website you want to analyze for design inspiration, then click the <strong>SitePrompt icon</strong> in your toolbar to open the wizard.
+      The panel slides in from the right and guides you through all 6 steps.
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="features-inner">
+    <h2 class="section-title">What the wizard does</h2>
+    <p class="section-sub">Six focused steps — takes about 10 minutes.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="feature-num">01</span>
+        <div class="feature-title">Describe Your Brand</div>
+        <div class="feature-desc">Name, purpose, unique value, color palette with pickers, logo upload, and current site URL.</div>
+      </div>
+      <div class="feature-card">
+        <span class="feature-num">02</span>
+        <div class="feature-title">Add Inspiration Sites</div>
+        <div class="feature-desc">Add up to 3 sites you love. Capture full-page screenshots or upload your own.</div>
+      </div>
+      <div class="feature-card">
+        <span class="feature-num">03</span>
+        <div class="feature-title">Distill Your Aesthetic</div>
+        <div class="feature-desc">Pick your overall style, describe your audience and the emotion you want to convey.</div>
+      </div>
+      <div class="feature-card">
+        <span class="feature-num">04</span>
+        <div class="feature-title">Deep Dive Analysis</div>
+        <div class="feature-desc">Checkboxes + notes for typography, layout, colors, imagery, and motion — per site. Grab specific regions with the built-in screen capper.</div>
+      </div>
+      <div class="feature-card">
+        <span class="feature-num">05</span>
+        <div class="feature-title">Review Your Brief</div>
+        <div class="feature-desc">See everything assembled into a proof before generating. Edit any section inline.</div>
+      </div>
+      <div class="feature-card">
+        <span class="feature-num">06</span>
+        <div class="feature-title">Get Your Prompts</div>
+        <div class="feature-desc">PDF design brief + 3 levels of Claude Design prompts — quick prototype, full design system, and complete spec.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<div class="section">
+  <h2 class="section-title">Common questions</h2>
+  <p class="section-sub"></p>
+  <div style="display:flex;flex-direction:column;gap:20px;max-width:640px;margin:0 auto;">
+    <div>
+      <div style="font-weight:700;margin-bottom:4px;">Is my data private?</div>
+      <div style="font-size:14px;color:#4b5563;">Your session is stored locally in your browser. When you click Generate, your brief is sent to our server to call Claude — we don't store it. Screenshots never leave your browser until you explicitly download the PDF.</div>
+    </div>
+    <div>
+      <div style="font-weight:700;margin-bottom:4px;">Do I need an account?</div>
+      <div style="font-size:14px;color:#4b5563;">No account needed to run the wizard. An account is only required to save sessions to the cloud dashboard — the free tier is enough.</div>
+    </div>
+    <div>
+      <div style="font-weight:700;margin-bottom:4px;">Why isn't it on the Chrome Web Store?</div>
+      <div style="font-size:14px;color:#4b5563;">SitePrompt is currently in preview. Loading unpacked takes 30 seconds and keeps you on the latest version. A Web Store release is planned.</div>
+    </div>
+    <div>
+      <div style="font-weight:700;margin-bottom:4px;">What do I do with the Claude Design prompts?</div>
+      <div style="font-size:14px;color:#4b5563;">Copy any of the three prompts and paste it into <a href="https://claude.ai/design" style="color:#6366f1;">claude.ai/design</a>. The quick prompt generates a landing page prototype in under a minute.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-banner">
+  <h2>Ready to build for real?</h2>
+  <p>ServiceVision turns your SitePrompt brief into a live prototype or full product.</p>
+  <a href="https://calendly.com/servicevision/siteprompt" target="_blank" rel="noopener">
+    Schedule a Free 30-min Consult →
+  </a>
+  <div style="margin-top:20px;display:flex;justify-content:center;gap:24px;flex-wrap:wrap;">
+    <div style="text-align:center;">
+      <div style="font-size:20px;font-weight:900;">$999</div>
+      <div style="font-size:12px;opacity:.75;">Starter — Landing page</div>
+    </div>
+    <div style="text-align:center;">
+      <div style="font-size:20px;font-weight:900;">$4,999</div>
+      <div style="font-size:12px;opacity:.75;">Growth — Full site/app</div>
+    </div>
+    <div style="text-align:center;">
+      <div style="font-size:20px;font-weight:900;">$19,999</div>
+      <div style="font-size:12px;opacity:.75;">Enterprise — Full-stack MVP</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 ServiceVision · <a href="https://servicevision.net">servicevision.net</a> · <a href="https://siteprompt.servicevision.io/privacy">Privacy Policy</a> · <a href="https://github.com/dbbuilder-org/siteprompt">GitHub</a></p>
+</footer>
+
+</body>
+</html>
