@@ -57,8 +57,10 @@ export default function Home() {
             Chrome Extension + AI-Powered Design Brief
           </div>
           <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-gray-900 mb-6">
-            Turn design inspiration into<br />
-            <span className="text-transparent bg-clip-text gradient-brand">prototype-ready prompts</span>
+            Turn design inspiration into{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400">
+              prototype-ready prompts
+            </span>
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-10">
             SitePrompt walks you through a structured wizard to distill what you love about up to 3 sites into a PDF design brief and Claude Design prompts — so your prototype looks exactly right from the first try.

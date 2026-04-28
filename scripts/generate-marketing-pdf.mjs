@@ -49,9 +49,9 @@ const s = StyleSheet.create({
   problemBox: { backgroundColor: "#fef2f2", borderRadius: 10, padding: 20, marginBottom: 12 },
   solutionBox: { backgroundColor: "#f0fdf4", borderRadius: 10, padding: 20, marginBottom: 12 },
 
-  // Steps grid
-  stepsRow: { flexDirection: "row", gap: 12, marginTop: 20 },
-  stepCard: { flex: 1, backgroundColor: "#fff", borderRadius: 10, padding: 16, border: "1px solid #e0e7ff" },
+  // Steps grid — wrap layout so boxes expand to fit their own content
+  stepsRow: { flexDirection: "row", flexWrap: "wrap", gap: 10, marginTop: 20 },
+  stepCard: { width: "31.5%", backgroundColor: "#fff", borderRadius: 10, padding: 14, border: "1px solid #e0e7ff" },
   stepNum: { fontSize: 22, fontWeight: 900, color: "#e0e7ff", marginBottom: 6 },
   stepTitle: { fontSize: 12, fontWeight: 700, color: "#1e1b4b", marginBottom: 4 },
   stepDesc: { fontSize: 10, color: GRAY, lineHeight: 1.6 },
@@ -174,7 +174,7 @@ function MarketingPDF() {
 
         React.createElement(View, { style: { flexDirection: "row", gap: 14 } },
           React.createElement(View, { style: { ...s.problemBox, flex: 1 } },
-            React.createElement(Text, { style: { fontSize: 13, fontWeight: 700, color: "#b91c1c", marginBottom: 8 } }, "❌  Without SitePrompt"),
+            React.createElement(Text, { style: { fontSize: 13, fontWeight: 700, color: "#b91c1c", marginBottom: 8 } }, "Without SitePrompt"),
             ...[
               "\"Make it look like Linear\" gives AI nothing to work with",
               "Vague color references lead to generic palettes",
@@ -187,7 +187,7 @@ function MarketingPDF() {
             ))
           ),
           React.createElement(View, { style: { ...s.solutionBox, flex: 1 } },
-            React.createElement(Text, { style: { fontSize: 13, fontWeight: 700, color: "#15803d", marginBottom: 8 } }, "✓  With SitePrompt"),
+            React.createElement(Text, { style: { fontSize: 13, fontWeight: 700, color: "#15803d", marginBottom: 8 } }, "With SitePrompt"),
             ...[
               "Structured 6-step wizard captures all design intent",
               "Screenshot capture locks in the exact elements you love",
@@ -276,7 +276,7 @@ function MarketingPDF() {
 
         React.createElement(View, { style: s.outputCard },
           React.createElement(Text, { style: s.outputLabel }, "Output 1"),
-          React.createElement(Text, { style: s.outputTitle }, "📄  PDF Design Brief"),
+          React.createElement(Text, { style: s.outputTitle }, "PDF Design Brief"),
           React.createElement(Text, { style: s.outputDesc },
             "A polished A4 document capturing your brand identity, design preferences, inspiration site analyses, color palette, and design synthesis. Shareable with any designer, developer, or AI tool. Includes the Claude prompts and the ServiceVision consult offer."
           ),
@@ -284,12 +284,12 @@ function MarketingPDF() {
 
         React.createElement(View, { style: s.outputCard },
           React.createElement(Text, { style: s.outputLabel }, "Output 2 — Three Prompt Levels"),
-          React.createElement(Text, { style: s.outputTitle }, "✨  Claude Design Prompts"),
+          React.createElement(Text, { style: s.outputTitle }, "Claude Design Prompts"),
           React.createElement(View, { style: { marginTop: 10, gap: 8 } },
             ...[
-              { tier: "⚡ Quick Prototype", desc: "200–300 words. Paste into claude.ai/design for a landing page prototype in under 2 minutes." },
-              { tier: "🎨 Full Design System", desc: "400–600 words. Comprehensive site prompt with component library direction, spacing, and brand tokens." },
-              { tier: "📐 Complete Specification", desc: "600–900 words. Full MVP spec including component states, responsive behavior, design tokens, and interaction patterns." },
+              { tier: "Quick Prototype", desc: "200–300 words. Paste into claude.ai/design for a landing page prototype in under 2 minutes." },
+              { tier: "Full Design System", desc: "400–600 words. Comprehensive site prompt with component library direction, spacing, and brand tokens." },
+              { tier: "Complete Specification", desc: "600–900 words. Full MVP spec including component states, responsive behavior, design tokens, and interaction patterns." },
             ].map(({ tier, desc }) =>
               React.createElement(View, { key: tier, style: { backgroundColor: "rgba(255,255,255,0.06)", borderRadius: 8, padding: 12 } },
                 React.createElement(Text, { style: { fontSize: 11, fontWeight: 700, color: "#a5b4fc", marginBottom: 4 } }, tier),
@@ -301,7 +301,7 @@ function MarketingPDF() {
 
         React.createElement(View, { style: s.outputCard },
           React.createElement(Text, { style: s.outputLabel }, "Output 3"),
-          React.createElement(Text, { style: s.outputTitle }, "🚀  Build-It-For-You Offer"),
+          React.createElement(Text, { style: s.outputTitle }, "Build-It-For-You Offer"),
           React.createElement(Text, { style: s.outputDesc },
             "Integrated call-to-action to schedule a free 30-minute consultation with ServiceVision — who turns SitePrompt briefs into real, deployed products at three price points."
           ),
